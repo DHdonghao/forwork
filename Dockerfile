@@ -1,4 +1,4 @@
-FROM centos:7.2.1511
+FROM centos:7.5.1804
 
 MAINTAINER thijs.schnitger@container-solutions.com
 
@@ -13,9 +13,9 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 VOLUME [ “/sys/fs/cgroup” ]
 
 RUN yum -y install epel-release
-RUN yum -y install cobbler cobbler-web dhcp bind syslinux pykickstart
+RUN yum -y install cobbler fence-agents cobbler-web dhcp dnsmasq syslinux pykickstart xinetd
 
-RUN systemctl enable cobblerd httpd dhcpd
+RUN systemctl enable cobblerd httpd dhcpd rsyncd xinetd
 
 # enable tftp
 RUN sed -i -e 's/\(^.*disable.*=\) yes/\1 no/' /etc/xinetd.d/tftp
