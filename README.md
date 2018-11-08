@@ -37,3 +37,7 @@ Use the accompanied Makefile to set it up. Issue make <target\> to make the foll
 * vbox:   Create a VirtualBox VNIC for listening on and issuing DHCP addresses. This is for testing Cobbler functionality in combination with Virtualbox VMs. Requires a working VirtualBox installation.
 
 
+
+edit  etc/cobbler/settings   etc/cobbler/dnsmasq.template
+######
+docker run --name supercobbler --hostname 99cloud -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro  -v /mnt/:/mnt   -v `pwd`/etc/cobbler/settings:/etc/cobbler/settings    -v `pwd`/etc/cobbler/dnsmasq.template:/etc/cobbler/dnsmasq.template  -v `pwd`/etc/cobbler/modules.conf:/etc/cobbler/modules.conf  --network=host  cobbler
